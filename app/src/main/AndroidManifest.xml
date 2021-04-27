@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mrhi2020.ex72cameraapptest2">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Ex72CameraAppTest2"
+        android:requestLegacyExternalStorage="true">
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 다른 앱에게 공개할 파일의 경로 지정 : 일종의 jdk의 환경변수설정 같은 -->
+        <!-- authorities : 자바에서 인식할 이 프로바이더의 명칭 [이 명칭은 디바이스 전체에 설치된 앱안에 중복된 이름 금지 (패키지명으로 지정)   -->
+        <!-- name : 프로바이더의 클래스 이름 - 원래 안드로이드에 있는 것  -->
+        <!-- exported : 이 앱말고 다른 앱에서 사용할 수 없도록       -->
+        <!-- grantUriPermissions : 이 경로에 대해 임시 퍼미션 허가  -->
+        <provider
+            android:authorities="com.mrhi2020.ex72cameraapptest2.FileProvider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <!-- 프로바이이더가 공개할 파일의 경로(path)들 지정 : xml로 설정 -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths"/>
+
+        </provider>
+
+
+    </application>
+
+</manifest>
